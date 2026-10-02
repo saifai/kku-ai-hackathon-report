@@ -246,6 +246,8 @@ html { scroll-behavior: smooth; }
 .eq-row .deg { font-family: var(--f-display); font-size: 1.15rem; }
 .eq-row .ai { color: var(--jacaranda); font-weight: 600; }
 .eq-row .op { font-family: var(--f-data); font-size: 1.2rem; color: var(--jacaranda); text-align: center; }
+.eq-row .out { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.eq-row .out .btn { flex-shrink: 0; }
 .eq-row .out small { display: block; color: var(--ink-2); font-size: 0.8rem; }
 @media (max-width: 820px) {
   .flow { grid-template-columns: 1fr; gap: 14px; }
@@ -531,18 +533,19 @@ section:not(.alt) .flow div::after { background: var(--paper); }
   </div>
   <div class="eq">
     <div class="eq-row head" aria-hidden="true"><span>Their degree</span><span></span><span>Their new skill</span><span></span><span>What they built</span></div>
-    <div class="eq-row"><span class="deg">Accounting</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out">An invoice maker that adds Saudi VAT<small>Munira Mansour Alqahtani</small></span></div>
-    <div class="eq-row"><span class="deg">Industrial engineering</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out">A job application tracker with interview preparation<small>Shaima Alharmali</small></span></div>
-    <div class="eq-row"><span class="deg">Public health</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out">A game that teaches children about diabetes<small>Enas Alhassan Alhazmi</small></span></div>
-    <div class="eq-row"><span class="deg">Translation</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out">A Vision 2030 career quiz in natural Arabic<small>Atheer Ahmed Ali Alqahtani</small></span></div>
+    <div class="eq-row"><span class="deg">Accounting</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out"><span>An invoice maker that adds Saudi VAT<small>Munira Mansour Alqahtani</small></span><a class="btn" href="https://aishifttraining.github.io/munira-invoice-maker/" target="_blank" rel="noopener">View project ↗</a></span></div>
+    <div class="eq-row"><span class="deg">Industrial engineering</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out"><span>A job application tracker with interview preparation<small>Shaima Alharmali</small></span><a class="btn" href="https://shaimaalharmali.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View project ↗</a></span></div>
+    <div class="eq-row"><span class="deg">Public health</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out"><span>A game that teaches children about diabetes<small>Enas Alhassan Alhazmi</small></span><a class="btn" href="https://enasalhazmi.github.io/kku-site/" target="_blank" rel="noopener">View project ↗</a></span></div>
+    <div class="eq-row"><span class="deg">Translation</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out"><span>A Vision 2030 career quiz in natural Arabic<small>Atheer Ahmed Ali Alqahtani</small></span><a class="btn" href="https://atheer-here.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View project ↗</a></span></div>
   </div>
-  <h3 class="sub">On their CV and in an interview, each student can show</h3>
+  <h3 class="sub">Tangible evidence for every CV and interview</h3>
   <div class="flow">
     <div><b>What they built</b><p>A live, published app they can open and demonstrate</p></div>
     <div><b>Why it matters</b><p>The real need it solves for a business or for people</p></div>
     <div><b>How they delivered it</b><p>From idea to published app, using AI</p></div>
   </div>
-  <blockquote class="lead-quote">Practical evidence of their ability to turn ideas into results using AI.</blockquote>
+  <p class="note">Practical evidence of their ability to turn ideas into results using AI.</p>
+  <blockquote class="lead-quote">Their skills become visible, and their candidacy more compelling.</blockquote>
 </section>
 
 <section id="next" class="alt">
