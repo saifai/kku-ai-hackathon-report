@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KKU AI Hackathon Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a printable report. One reading column (~68ch) with full-bleed figure rows; sections break onto new pages in print. */
+:root {
+  --paper: #eaf3ee;        /* tint of KKU green, for the alternate bands */
+  --sheet: #ffffff;
+  --ink: #161616;          /* KKU site text black */
+  --ink-2: #384250;
+  --rule: #d2d6db;
+  --juniper: #093f26;      /* KKU deep green */
+  --jacaranda: #1b8354;    /* KKU primary green, the accent */
+  --jacaranda-soft: #d9efe3;
+  --ochre: #3baa80;        /* KKU light green, used only in charts */
+  --bar-bg: #e7ebe6;
+  --f-display: "Young Serif", Georgia, "Times New Roman", serif;
+  --f-body: "Public Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-data: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #111815; --sheet: #1e2a24; --ink: #e8eee9; --ink-2: #a9b8af; --rule: #2c3a33;
+    --juniper: #7cc4a0; --jacaranda: #3baa80; --jacaranda-soft: #12382a; --ochre: #3baa80; --bar-bg: #24302a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #111815; --sheet: #1e2a24; --ink: #e8eee9; --ink-2: #a9b8af; --rule: #2c3a33;
+  --juniper: #7cc4a0; --jacaranda: #3baa80; --jacaranda-soft: #12382a; --ochre: #3baa80; --bar-bg: #24302a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.6; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 80px; }
+.col { max-width: 68ch; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); }
+h3 { font-size: 1.35rem; }
+p { margin: 0; }
+.stack { display: flex; flex-direction: column; gap: 14px; }
+.eyebrow { font-family: var(--f-data); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--juniper); }
+.muted { color: var(--ink-2); }
+section { padding-block: 56px 8px; border-top: 1px solid var(--rule); display: flex; flex-direction: column; gap: 26px; }
+a { color: var(--jacaranda); }
+a:focus-visible { outline: 2px solid var(--jacaranda); outline-offset: 2px; }
+
+/* Cover */
+.cover { display: grid; gap: 28px; padding-block: 8px 48px; }
+.cover .meta { display: flex; flex-wrap: wrap; gap: 8px 28px; font-family: var(--f-data); font-size: 0.85rem; color: var(--ink-2); }
+.cover .lede { font-size: 1.2rem; max-width: 60ch; }
+.cover-figs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.cover-figs img { width: 100%; height: auto; aspect-ratio: 2/1; object-fit: cover; object-position: center top; border-radius: 6px; display: block; }
+
+/* Figures */
+figure { margin: 0; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+figure img { width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid var(--rule); background: var(--sheet); }
+figcaption { font-size: 0.85rem; color: var(--ink-2); }
+.build .grid-2 img { aspect-ratio: 2/1; object-fit: cover; object-position: top; }
+figcaption .src { font-family: var(--f-data); font-size: 0.74rem; letter-spacing: 0.04em; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+
+/* Numbers */
+.funnel { display: flex; flex-direction: column; gap: 12px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; padding: 22px; }
+.frow { display: grid; grid-template-columns: 11rem 1fr 3.5rem; gap: 14px; align-items: center; }
+.frow .lbl { font-size: 0.95rem; }
+.frow .lbl small { display: block; color: var(--ink-2); font-size: 0.8rem; }
+.frow .track { background: var(--bar-bg); border-radius: 3px; height: 26px; position: relative; }
+.frow .fill { background: var(--juniper); height: 100%; border-radius: 3px; }
+.frow.hi .fill { background: var(--jacaranda); }
+.frow .n { font-family: var(--f-data); font-variant-numeric: tabular-nums; font-size: 1.15rem; text-align: right; }
+.note { font-size: 0.85rem; color: var(--ink-2); }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-block: 1px solid var(--rule); }
+.facts div { padding: 16px 14px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; gap: 2px; }
+.facts div:last-child { border-right: 0; }
+.facts b { font-family: var(--f-display); font-weight: 400; font-size: 2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.facts span { font-size: 0.85rem; color: var(--ink-2); }
+
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-family: var(--f-data); font-weight: 500; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+td.num { font-family: var(--f-data); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.tbl { overflow-x: auto; background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; }
+.typebar { display: inline-block; height: 10px; background: var(--ochre); border-radius: 2px; vertical-align: middle; margin-right: 8px; }
+
+.timeline { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
+.timeline div { padding: 14px 16px 14px 0; border-top: 3px solid var(--juniper); display: flex; flex-direction: column; gap: 4px; }
+.timeline div + div { padding-left: 16px; }
+.timeline .d { font-family: var(--f-data); font-size: 0.8rem; color: var(--juniper); }
+.timeline p { font-size: 0.92rem; }
+
+/* Showcase */
+.build { display: flex; flex-direction: column; gap: 20px; padding-block: 28px; border-top: 1px dashed var(--rule); }
+.build:first-of-type { border-top: 0; }
+.build-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; }
+.build-head .who { font-size: 0.95rem; color: var(--ink-2); }
+.pill { font-family: var(--f-data); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: var(--jacaranda-soft); color: var(--jacaranda); white-space: nowrap; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px; }
+.two h4 { font-family: var(--f-data); font-weight: 500; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 8px; }
+ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 6px; }
+blockquote { margin: 0; padding: 4px 0 4px 18px; border-left: 3px solid var(--jacaranda); font-family: var(--f-display); font-size: 1.12rem; line-height: 1.5; }
+blockquote cite { display: block; margin-top: 8px; font-family: var(--f-body); font-style: normal; font-size: 0.85rem; color: var(--ink-2); }
+.quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 32px; }
+
+/* Gallery */
+.gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px 16px; }
+.plink { font-family: var(--f-data); font-size: 0.78rem; overflow-wrap: anywhere; }
+.gallery figcaption b { color: var(--ink); font-weight: 600; display: block; font-size: 0.92rem; }
+.pending { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 18px; font-size: 0.9rem; }
+.pending div { border: 1px dashed var(--rule); border-radius: 6px; padding: 10px 12px; }
+.pending small { display: block; color: var(--ink-2); }
+
+footer { padding-top: 40px; font-size: 0.82rem; color: var(--ink-2); border-top: 1px solid var(--rule); margin-top: 40px; }
+
+@media (max-width: 820px) {
+  .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cover-figs, .two, .quotes, .grid-2 { grid-template-columns: 1fr; }
+  .grid-3, .gallery, .pending { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts, .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .facts div:nth-child(2) { border-right: 0; }
+  .facts div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+  .timeline div, .timeline div + div { padding-left: 0; padding-right: 12px; }
+  .frow { grid-template-columns: 1fr 3rem; }
+  .frow .track { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .grid-3, .gallery, .pending { grid-template-columns: 1fr; }
+}
+@media print {
+  body { background: #fff; font-size: 11pt; }
+  .wrap { padding-block: 0; max-width: none; }
+  section { break-before: page; border-top: 0; }
+  .build, figure, .funnel, .tbl, blockquote { break-inside: avoid; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+
+/* Sticky section bar */
+.toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); border-bottom: 1px solid var(--rule); margin-inline: -20px; padding-inline: 20px; }
+.toc ol { list-style: none; margin: 0 auto; padding: 0; max-width: 1120px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.toc a { display: block; white-space: nowrap; padding: 12px 10px; font-size: 0.85rem; color: var(--ink-2); text-decoration: none; border-bottom: 2px solid transparent; }
+.toc a:hover { color: var(--ink); }
+.toc a.on { color: var(--jacaranda); border-bottom-color: var(--jacaranda); }
+section { scroll-margin-top: 56px; }
+/* Live project button */
+.btn { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; padding: 7px 14px; border-radius: 999px; background: var(--jacaranda); color: var(--sheet); font-size: 0.82rem; font-weight: 600; text-decoration: none; }
+.btn:hover { filter: brightness(1.08); }
+.gallery .btn { padding: 5px 12px; font-size: 0.78rem; }
+@media print { .toc { display: none; } .btn { background: none; color: var(--ink); padding: 0; } .btn::after { content: " " attr(href); font-family: var(--f-data); font-weight: 400; } }
+
+/* Cards, judges' notes, chat */
+@media (min-width: 821px) { .facts.three { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.obs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.card { background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; break-inside: avoid; }
+.card p { font-size: 0.95rem; }
+.fix { font-size: 0.88rem; color: var(--ink-2); border-top: 1px solid var(--rule); padding-top: 12px; }
+.fix b { font-family: var(--f-data); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; margin-right: 8px; }
+.story { display: flex; flex-direction: column; gap: 14px; max-width: 68ch; padding-block: 8px; break-inside: avoid; }
+.chat { display: flex; flex-direction: column; gap: 10px; max-width: 68ch; }
+.msg { background: var(--sheet); border: 1px solid var(--rule); border-radius: 4px 14px 14px 14px; padding: 10px 14px; align-self: flex-start; break-inside: avoid; }
+.msg b { display: block; font-family: var(--f-data); font-weight: 500; font-size: 0.72rem; color: var(--ink-2); }
+
+/* One at a time on screen, everything on paper */
+.stepper { display: flex; flex-direction: column; gap: 18px; }
+.step-tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.step-tabs button, .step-ctl button, .more { font: inherit; font-size: 0.85rem; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); cursor: pointer; white-space: nowrap; }
+.step-tabs button[aria-selected="true"] { background: var(--jacaranda); border-color: var(--jacaranda); color: var(--sheet); }
+.step-tabs button:focus-visible, .step-ctl button:focus-visible, .more:focus-visible { outline: 2px solid var(--jacaranda); outline-offset: 2px; }
+.step-ctl { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.step-ctl span { font-family: var(--f-data); font-size: 0.8rem; color: var(--ink-2); }
+.more { align-self: flex-start; }
+@media screen {
+  .stepper.js > .step:not(.on) { display: none; }
+  .stepper.js .build { border-top: 0; padding-block: 4px; }
+  .gallery.js:not(.open) figure:nth-child(n+9) { display: none; }
+}
+@media (max-width: 820px) { .obs { grid-template-columns: 1fr; } }
+@media print { .step-tabs, .step-ctl, .more { display: none; } }
+
+/* Landing page: a hero, then full-width bands that alternate paper and sheet, one idea per band */
+.wrap { padding-block: 0; }
+section { border-top: 0; padding-block: 72px; gap: 32px; }
+section.alt, .hero { background: var(--sheet); box-shadow: 0 0 0 100vmax var(--sheet); clip-path: inset(0 -100vmax); }
+section.alt .card, section.alt .msg, section.alt .tbl { background: var(--paper); }
+section > .col:first-child { align-self: center; text-align: center; align-items: center; }
+.hero { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 28px; padding-block: 72px 56px; }
+.hero h1 { font-size: clamp(2.6rem, 6.5vw, 4.6rem); max-width: 16ch; }
+.hero .lede { font-size: 1.25rem; max-width: 52ch; color: var(--ink-2); }
+.hero .facts, .hero .cover-figs { width: 100%; }
+.hero .facts div { align-items: center; }
+.hero figcaption { text-align: left; }
+.cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.btn.lg { padding: 12px 24px; font-size: 1rem; align-self: auto; }
+.btn.ghost { background: none; color: var(--jacaranda); box-shadow: inset 0 0 0 1.5px var(--jacaranda); }
+.note { text-align: center; }
+.big { display: block; font-size: clamp(3.5rem, 10vw, 6rem); line-height: 1; color: var(--jacaranda); margin-bottom: 10px; }
+.pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.lead-quote { align-self: center; max-width: 44ch; padding: 0; border-left: 0; text-align: center; font-size: clamp(1.2rem, 2.4vw, 1.5rem); }
+.solo { display: flex; flex-direction: column; align-items: center; text-align: center; font-family: var(--f-display); }
+.solo p { font-family: var(--f-body); }
+.chat, .story { align-self: center; margin-inline: auto; width: 100%; }
+.step-tabs { justify-content: safe center; }
+.pill { color: var(--juniper); }
+html { scroll-behavior: smooth; }
+.toc { position: -webkit-sticky; position: sticky; top: 0; z-index: 50; border-bottom: 0; box-shadow: 0 0 0 100vmax var(--paper), 0 1px 0 var(--rule); clip-path: inset(0 -100vmax -1px); }
+.toc ol { justify-content: safe center; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media (max-width: 480px) { section { padding-block: 52px; } .hero { padding-block: 48px 40px; } }
+@media print { section.alt, .hero { box-shadow: none; clip-path: none; background: none; } .cta { display: none; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero" id="numbers">
+  <div class="eyebrow">AI Hackathon · King Khalid University · Women's cohort · September 2026</div>
+  <h1>AI Coding For Business Results</h1>
+  <p class="lede">Final-year students from accounting, nursing, translation and engineering learned to build with AI. In 3 days, 25 of them built and submitted a product of their own.</p>
+  <div class="cta">
+    <a class="btn lg" href="#top-five">See the top five</a>
+    <a class="btn lg ghost" href="#projects">Browse all 25 products</a>
+  </div>
+  <div class="facts">
+    <div><b>35</b><span>registered</span></div>
+    <div><b>31</b><span>completed Day 1</span></div>
+    <div><b>25</b><span>submitted a product</span></div>
+    <div><b>5</b><span>showcased on Demo Day</span></div>
+  </div>
+  <div class="cover-figs">
+    <figure><img src="img/z-shaima-1.jpg" alt="SAAY, a job application tracker by Shaima Alharmali"><figcaption>Job Application Tracker, by Shaima Alharmali</figcaption></figure>
+    <figure><img src="img/z-munira-1.jpg" alt="Invoice Maker, by Munira Mansour Alqahtani"><figcaption>Invoice Maker, by Munira Mansour Alqahtani</figcaption></figure>
+  </div>
+  <blockquote class="lead-quote">Three days ago, none of you knew how to code with AI and build something that was actually useful for people. And here we are today.<cite>Sai, lead instructor, to the students on Demo Day</cite></blockquote>
+</header>
+
+<nav class="toc" aria-label="Sections"><ol>
+  <li><a href="#starting-point">Highlights</a></li>
+  <li><a href="#top-five">Products Built By Students</a></li>
+  <li><a href="#stories">What The Students Thought</a></li>
+</ol></nav>
+
+<section id="starting-point">
+  <div class="stack col">
+    <div class="eyebrow">Starting point</div>
+    <h2><span class="big">100%</span>had never coded anything with AI</h2>
+  </div>
+  <div class="pills">
+    <span class="pill">Accounting</span><span class="pill">Translation</span><span class="pill">Nursing</span><span class="pill">Public health</span><span class="pill">Business</span><span class="pill">Media</span><span class="pill">Information systems</span><span class="pill">Engineering</span>
+  </div>
+  <blockquote class="lead-quote">For someone who cannot even use a computer correctly, building this from A to Z is a huge thing for me.<cite>Jenan Abdulrahman, translation</cite></blockquote>
+  <p class="note">Counted from the 10 students who described their background on Demo Day.</p>
+</section>
+
+<section id="distinctive" class="alt">
+  <div class="stack col">
+    <div class="eyebrow">What stood out</div>
+    <h2>In the words of our lead instructor, Sai</h2>
+  </div>
+  <blockquote class="lead-quote">You have a level of commitment that I don't see in most adults, I don't see in most 40, 50-year-olds.<cite>Sai, to the students on Demo Day</cite></blockquote>
+  <div class="solo">
+    <span class="big">12 → 25</span>
+    <p class="muted">submissions predicted vs received</p>
+  </div>
+</section>
+
+<section id="top-five">
+  <div class="stack col">
+    <div class="eyebrow">Demo Day</div>
+    <h2>The top five, and how we chose them</h2>
+    <p class="muted">On-time submission came first. The team then reviewed, scored and ranked every project on four weighted criteria. Five were demonstrated live, in no particular order.</p>
+  </div>
+  <div class="facts">
+    <div><b>35%</b><span>it works</span></div>
+    <div><b>25%</b><span>fits the brief and is useful</span></div>
+    <div><b>20%</b><span>easy to use, works on a phone</span></div>
+    <div><b>20%</b><span>creative design</span></div>
+  </div>
+
+  <div class="stepper" data-stepper>
+  <article class="build step" data-label="Invoice Maker">
+    <div class="build-head"><h3>Invoice Maker</h3><span class="pill">Invoice maker</span></div>
+    <p class="who">Munira Mansour Alqahtani · accounting · first time using AI</p>
+    <a class="btn" href="https://aishifttraining.github.io/munira-invoice-maker/" target="_blank" rel="noopener">View live project ↗</a>
+    <div class="grid-2">
+      <figure><img src="img/z-munira-1.jpg" alt="Invoice Maker, live on Demo Day"><figcaption>Live on Demo Day</figcaption></figure>
+      <figure><img src="img/l-munira.jpg" alt="Invoice Maker with a sample invoice" style="object-position: bottom"><figcaption>Ready to print for a customer</figcaption></figure>
+    </div>
+    <div class="two">
+      <ul>
+        <li>The invoice updates live as you type</li>
+        <li>Adds Saudi VAT and totals in SAR automatically</li>
+        <li>Saves customers and numbers each invoice</li>
+        <li>Arabic and English, works on a phone</li>
+      </ul>
+      <blockquote>I chose this project because I'm an accounting student.<cite>Munira</cite></blockquote>
+    </div>
+    <p class="fix"><b>To fix next</b>Some labels stay in English after switching to Arabic.</p>
+  </article>
+
+  <article class="build step" data-label="2030 Compass">
+    <div class="build-head"><h3>2030 Compass</h3><span class="pill">Vision 2030 quiz</span></div>
+    <p class="who">Wasan Asiri</p>
+    <a class="btn" href="https://susu-30.github.io/2030-compass/" target="_blank" rel="noopener">View live project ↗</a>
+    <div class="grid-3">
+      <figure><img src="img/z-wasan-1.jpg" alt="2030 Compass opening screen"><figcaption>Start</figcaption></figure>
+      <figure><img src="img/z-wasan-2.jpg" alt="2030 Compass question"><figcaption>Ten questions</figcaption></figure>
+      <figure><img src="img/z-wasan-3.jpg" alt="2030 Compass hybrid career path"><figcaption>Your hybrid career path</figcaption></figure>
+    </div>
+    <div class="two">
+      <ul>
+        <li>Matches you to Vision 2030 sectors, with a percentage for each</li>
+        <li>Suggests careers and a downloadable "2030 Passport"</li>
+        <li>"You rebuilt a million-dollar company in three days" (Sai)</li>
+      </ul>
+      <blockquote>The project was generally easy and really fun.<cite>Wasan</cite></blockquote>
+    </div>
+    <p class="fix"><b>To fix next</b>Tidy the PDF download, and fit the smallest phones.</p>
+  </article>
+
+  <article class="build step" data-label="2030 Quiz">
+    <div class="build-head"><h3>Massari</h3><span class="pill">Vision 2030 quiz</span></div>
+    <p class="who">Atheer Ahmed Ali Alqahtani · translation</p>
+    <a class="btn" href="https://atheer-here.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View live project ↗</a>
+    <div class="grid-3">
+      <figure><img src="img/z-atheer-1.jpg" alt="Massari opening screen"><figcaption>Start</figcaption></figure>
+      <figure><img src="img/z-atheer-2.jpg" alt="Massari sector tour"><figcaption>An animated tour of the sectors</figcaption></figure>
+      <figure><img src="img/z-atheer-3.jpg" alt="Massari result at night"><figcaption>The result scene moves from sunset to night</figcaption></figure>
+    </div>
+    <div class="two">
+      <ul>
+        <li>"One of the most beautiful things I've ever seen" (Sai)</li>
+        <li>Twelve questions, six sectors, a shareable result card</li>
+        <li>Natural Arabic, not word-for-word translation</li>
+        <li>Tested on her sister and two friends</li>
+      </ul>
+      <blockquote>AI is a tool that helps us create, not a replacement.<cite>Atheer</cite></blockquote>
+    </div>
+    <p class="fix"><b>To fix next</b>Ground the quiz in the official Vision 2030 sector guidance.</p>
+  </article>
+
+  <article class="build step" data-label="Abha Trip Advisor">
+    <div class="build-head"><h3>Abha Guide</h3><span class="pill">Abha visitor guide</span></div>
+    <p class="who">Jenan Abdulrahman · translation</p>
+    <a class="btn" href="https://jenantranslator-05.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View live project ↗</a>
+    <div class="grid-3">
+      <figure><img src="img/z-jenan-1.jpg" alt="Abha Guide places"><figcaption>16 places to explore</figcaption></figure>
+      <figure><img src="img/z-jenan-2.jpg" alt="Abha Guide trip plan"><figcaption>A trip plan made for you</figcaption></figure>
+      <figure><img src="img/z-jenan-3.jpg" alt="Hidden Abha day"><figcaption>A day as a local</figcaption></figure>
+    </div>
+    <div class="two">
+      <ul>
+        <li>Plans each day with costs and a map for every stop</li>
+        <li>"Hidden Abha": places her family and friends love</li>
+        <li>A bad-weather alternative for each plan</li>
+        <li>Some photos taken by Jenan and her sisters</li>
+      </ul>
+      <blockquote>When I travel, I want to live a day as a local.<cite>Jenan</cite></blockquote>
+    </div>
+    <p class="fix"><b>To fix next</b>A couple of map links need repairing.</p>
+  </article>
+
+  <article class="build step" data-label="Job Application Tracker">
+    <div class="build-head"><h3>SAAY</h3><span class="pill">Job application tracker</span></div>
+    <p class="who">Shaima Alharmali · industrial engineering</p>
+    <a class="btn" href="https://shaimaalharmali.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View live project ↗</a>
+    <div class="grid-2">
+      <figure><img src="img/z-shaima-1.jpg" alt="SAAY home"><figcaption>Start</figcaption></figure>
+      <figure><img src="img/z-shaima-2.jpg" alt="SAAY tracker"><figcaption>Every application and when to follow up</figcaption></figure>
+      <figure><img src="img/z-shaima-3.jpg" alt="SAAY interview preparation"><figcaption>Interview preparation</figcaption></figure>
+      <figure><img src="img/z-shaima-4.jpg" alt="SAAY checklist"><figcaption>A checklist for each interview</figcaption></figure>
+    </div>
+    <div class="two">
+      <ul>
+        <li>Made a hard problem simple</li>
+        <li>Built-in interview preparation</li>
+        <li>The team tried to break it and could not</li>
+      </ul>
+      <blockquote>Saay means striving. Behind every application is a person building a future.<cite>Shaima</cite></blockquote>
+    </div>
+    <p class="fix"><b>Judges' note</b>No issues found.</p>
+  </article>
+  </div>
+</section>
+
+<section id="projects" class="alt">
+  <div class="stack col">
+    <div class="eyebrow">Every product</div>
+    <h2>Seven ideas, 25 different products</h2>
+    <p class="muted">Many in Arabic and English, built around Abha and Vision 2030</p>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Project</th><th style="text-align:right">Built</th></tr></thead>
+      <tbody>
+        <tr><td><span class="typebar" style="width:90px"></span>Abha visitor guide</td><td class="num">9</td></tr>
+        <tr><td><span class="typebar" style="width:50px"></span>Which Vision 2030 sector suits you?</td><td class="num">5</td></tr>
+        <tr><td><span class="typebar" style="width:30px"></span>Classic game</td><td class="num">3</td></tr>
+        <tr><td><span class="typebar" style="width:20px"></span>Invoice maker for a small business</td><td class="num">2</td></tr>
+        <tr><td><span class="typebar" style="width:20px"></span>Job application tracker</td><td class="num">2</td></tr>
+        <tr><td><span class="typebar" style="width:20px"></span>Salary and job offer planner</td><td class="num">2</td></tr>
+        <tr><td><span class="typebar" style="width:20px"></span>CV or portfolio page</td><td class="num">2</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="gallery" data-more>
+    <figure><img src="img/l-raghad.jpg" alt="Vision 2030 Sector Explorer" loading="lazy"><figcaption><b>Raghad Hassan Alsuqor</b>Vision 2030 Sector Explorer</figcaption><a class="btn" href="https://raghadalyami2004-lgtm.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-wateen.jpg" alt="Discover Your Future" loading="lazy"><figcaption><b>Wateen Mohammed Bomdrah</b>Discover Your Future</figcaption><a class="btn" href="https://aishifttraining.github.io/wateen-discover-your-future/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-sama-a.jpg" alt="Career Sector Quiz" loading="lazy"><figcaption><b>Sama Abdulrahman</b>Career Sector Quiz</figcaption><a class="btn" href="https://sama7-art.github.io/career-sector-quiz/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-layan.jpg" alt="Abha, at your pace" loading="lazy"><figcaption><b>Layan Hussain Mushabab Alqahtani</b>Abha, at your pace</figcaption><a class="btn" href="https://layan-h-m.github.io/kku-site/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-dana.jpg" alt="October in Abha" loading="lazy"><figcaption><b>Dana Abdullah Ali Asiri</b>October in Abha</figcaption><a class="btn" href="https://asiridana10-rn.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-malath-f.jpg" alt="Abha, in season" loading="lazy"><figcaption><b>Malath Fahad Alamari</b>Abha, in season</figcaption><a class="btn" href="https://malathfahad.github.io/abha-guide/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-atheer-a.jpg" alt="Abha Visitor Guide" loading="lazy"><figcaption><b>Atheer Abdulaziz Alqahtani</b>Abha Visitor Guide</figcaption><a class="btn" href="https://a2atheer.github.io/abha-visitor-guide-public/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-shahad.jpg" alt="أبها، ما وراء السحاب" loading="lazy"><figcaption><b>Shahad Alhajri</b>أبها، ما وراء السحاب</figcaption><a class="btn" href="https://aishifttraining.github.io/shahad-abha/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-shouq.jpg" alt="Discover Abha" loading="lazy"><figcaption><b>Shouq Dhafer</b>Discover Abha</figcaption><a class="btn" href="https://aishifttraining.github.io/shouq-discover-abha/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-sama-m.jpg" alt="Abha Explorer" loading="lazy"><figcaption><b>Sama Mohammed Ahmed</b>Abha Explorer</figcaption><a class="btn" href="https://aishifttraining.github.io/sama-abha-explorer/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-wajd.jpg" alt="ABHA, a field guide to Aseer" loading="lazy"><figcaption><b>Wajd AlHarthy</b>ABHA, a field guide to Aseer</figcaption><a class="btn" href="https://aishifttraining.github.io/wajd-abha-field-guide/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-enas.jpg" alt="Brave Gluco" loading="lazy"><figcaption><b>Enas Alhassan Alhazmi</b>Brave Gluco</figcaption><a class="btn" href="https://enasalhazmi.github.io/kku-site/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-rahaf.jpg" alt="Pop the Balloons" loading="lazy"><figcaption><b>Rahaf Hussain Saad</b>Pop the Balloons</figcaption><a class="btn" href="https://rahaf20j.github.io/classic-game/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-danah.jpg" alt="Fairy Flight" loading="lazy"><figcaption><b>Danah Mohammed Albarqi</b>Fairy Flight</figcaption><a class="btn" href="https://aishifttraining.github.io/danah-fairy-flight/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-saja.jpg" alt="Your Salary, Actually" loading="lazy"><figcaption><b>Saja Abdullah Mohammed</b>Your Salary, Actually</figcaption><a class="btn" href="https://aishifttraining.github.io/saja-salary-planner/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-lujain.jpg" alt="Salary & Job Offer Planner" loading="lazy"><figcaption><b>Lujain Abdallh</b>Salary & Job Offer Planner</figcaption><a class="btn" href="https://aishifttraining.github.io/lujain-salary-planner/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-malath-s.jpg" alt="Hasebti, invoice maker" loading="lazy"><figcaption><b>Malath Al Shehri</b>Hasebti, invoice maker</figcaption><a class="btn" href="https://aishifttraining.github.io/malath-hasebti-invoice/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-shorouq.jpg" alt="CareerFlow" loading="lazy"><figcaption><b>Shorouq Dhafer Abdullah</b>CareerFlow</figcaption><a class="btn" href="https://aishifttraining.github.io/shorouq-careerflow/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-retal.jpg" alt="Professional portfolio" loading="lazy"><figcaption><b>Retal Alalmonus</b>Professional portfolio</figcaption><a class="btn" href="https://reralalalmunis.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View live project ↗</a></figure>
+    <figure><img src="img/l-alanoud.jpg" alt="Dental clinic page" loading="lazy"><figcaption><b>Alanoud Arim</b>Professional page, dental clinic</figcaption><a class="btn" href="https://aishifttraining.github.io/alanoud-dental-clinic/" target="_blank" rel="noopener">View live project ↗</a></figure>
+  </div>
+</section>
+
+<section id="cause">
+  <div class="stack col">
+    <div class="eyebrow">Built for a cause</div>
+    <h2>A game for children with diabetes</h2>
+  </div>
+  <div class="two">
+    <div class="stack">
+      <ul>
+        <li>Enas Alhassan Alhazmi, public health student</li>
+        <li>Wants children to understand their condition, its symptoms and what to do in an emergency</li>
+        <li>Built it in under 12 hours</li>
+        <li>Plans to keep building it</li>
+      </ul>
+      <blockquote>When I dreamed about this game two years ago, I put it aside and said, "I'll look at it after I graduate." When this hackathon showed up, I got so excited.<cite>Enas</cite></blockquote>
+    </div>
+    <figure><img src="img/l-enas.jpg" alt="Brave Gluco, a game for children with diabetes"><figcaption>Brave Gluco</figcaption></figure>
+  </div>
+</section>
+
+<section id="stories" class="alt">
+  <div class="stack col">
+    <div class="eyebrow">Their stories</div>
+    <h2>What it was like, in their words</h2>
+  </div>
+  <div class="stepper" data-stepper>
+    <article class="story step" data-label="Jenan">
+      <h3>From calling her dad to open a file</h3>
+      <p class="who">Jenan Abdulrahman · translation · Abha Guide</p>
+      <blockquote>When I started, I was calling my dad a thousand times because I couldn't open a file. When I looked at my website for the first time, it was like, oh my gosh, it's easy.</blockquote>
+    </article>
+    <article class="story step" data-label="Sama">
+      <h3>Her 13-year-old brother wants to learn next</h3>
+      <p class="who">Sama Mohammed Ahmed · translation · Abha Explorer</p>
+      <blockquote>When he saw my website he was surprised and asked me how to do coding. I told him everything, and he is so excited to try it.</blockquote>
+    </article>
+    <article class="story step" data-label="Retal">
+      <h3>She deleted her project and started again</h3>
+      <p class="who">Retal Alalmonus · business administration · Professional portfolio</p>
+      <p>A simple colour change kept failing, so she rebuilt from the start and still submitted.</p>
+      <blockquote>Give it a try, and don't be afraid of making mistakes.</blockquote>
+    </article>
+    <article class="story step" data-label="Shorouq">
+      <h3>You don't have to know everything first</h3>
+      <p class="who">Shorouq Dhafer Abdullah · industrial engineering · CareerFlow</p>
+      <blockquote>Don't underestimate what you can create just because you have not learned how to do it yet.</blockquote>
+    </article>
+    <article class="story step" data-label="Wateen">
+      <h3>Leaving with more than a project</h3>
+      <p class="who">Wateen Mohammed Bomdrah · management information systems · Discover Your Future</p>
+      <blockquote>You didn't just teach us how to build something with AI. You challenged us to believe that we could do things we had never tried before.</blockquote>
+    </article>
+  </div>
+</section>
+
+<section id="room">
+  <div class="stack col">
+    <div class="eyebrow">In the room</div>
+    <h2>The students cheered each other on</h2>
+    <p class="muted">From the live chat on Demo Day, 30 September 2026</p>
+  </div>
+  <div class="chat">
+    <div class="msg"><b>17:23 · Munira Alqahtani</b>The invoice number changes every time you print, in case you hadn't noticed.</div>
+    <div class="msg"><b>17:34 · Enas Alhazmi</b>Atheer are u IT?</div>
+    <div class="msg"><b>17:38 · Shaima Alharmali</b>It's so good that AI cannot even do it by its own! It has a human touch, ATHEER's touch!</div>
+    <div class="msg"><b>17:55 · Enas Alhazmi, on SAAY</b>I will use your project with looove next year</div>
+    <div class="msg"><b>18:02 · Shaima Alharmali</b>I feel like I can own this world 🙂</div>
+    <div class="msg"><b>18:03 · Malath Mohammed</b>An experience I never expected to have, and it was absolutely amazing!</div>
+  </div>
+</section>
+
+<section id="next" class="alt">
+  <div class="stack col">
+    <div class="eyebrow">What comes next</div>
+    <h2>They keep building</h2>
+  </div>
+  <div class="obs">
+    <div class="card"><h3>A Keep Building Pack</h3><p>Every student gets a guide to setup, habits, security and publishing.</p></div>
+    <div class="card"><h3>On every CV</h3><p>Each product is real, live work a student can show an employer.</p></div>
+    <div class="card"><h3>They asked to go further</h3><p>Real users and more complex products.</p></div>
+    <div class="card"><h3>Ready to run again</h3><p>The same programme can run for other KKU colleges and partner organisations.</p></div>
+  </div>
+</section>
+
+</div>
+
+<script>
+(() => {
+  document.querySelectorAll('[data-stepper]').forEach(s => {
+    const steps = [...s.querySelectorAll(':scope > .step')];
+    const mk = (tag, text) => { const el = document.createElement(tag); if (text) el.textContent = text; if (tag === 'button') el.type = 'button'; return el; };
+    const tabs = mk('div'); tabs.className = 'step-tabs'; tabs.setAttribute('role', 'tablist');
+    const btns = steps.map((st, k) => { const b = mk('button', st.dataset.label); b.setAttribute('role', 'tab'); b.addEventListener('click', () => show(k)); tabs.append(b); return b; });
+    const ctl = mk('div'); ctl.className = 'step-ctl';
+    const prev = mk('button', '← Previous'), count = mk('span'), next = mk('button', 'Next →');
+    ctl.append(prev, count, next);
+    let i = 0;
+    function show(n) {
+      i = (n + steps.length) % steps.length;
+      steps.forEach((el, k) => el.classList.toggle('on', k === i));
+      btns.forEach((b, k) => b.setAttribute('aria-selected', k === i));
+      count.textContent = `${i + 1} of ${steps.length}`;
+    }
+    prev.addEventListener('click', () => show(i - 1));
+    next.addEventListener('click', () => show(i + 1));
+    s.prepend(tabs); s.append(ctl); s.classList.add('js'); show(0);
+  });
+  document.querySelectorAll('[data-more]').forEach(g => {
+    const n = g.children.length;
+    if (n <= 8) return;
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'more'; b.textContent = `Show all ${n} products`;
+    b.addEventListener('click', () => { g.classList.add('open'); b.remove(); });
+    g.classList.add('js'); g.after(b);
+  });
+})();
+(() => {
+  const links = [...document.querySelectorAll('.toc a')];
+  const secs = [...document.querySelectorAll('section[id]')];
+  if (!('IntersectionObserver' in window)) return;
+  const group = {}; let cur = null;
+  secs.forEach(sec => { const a = links.find(l => l.getAttribute('href') === '#' + sec.id); if (a) cur = a; group[sec.id] = cur; });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      links.forEach(a => a.classList.remove('on'));
+      const a = group[e.target.id];
+      if (a) { a.classList.add('on'); const ol = a.closest('ol'); ol.scrollLeft = a.offsetLeft - ol.clientWidth / 2 + a.offsetWidth / 2; }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  secs.forEach(sec => io.observe(sec));
+})();
+</script>
+
+</body>
+</html>
