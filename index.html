@@ -211,6 +211,15 @@ section > .col:first-child { align-self: center; text-align: center; align-items
 .chat, .story { align-self: center; margin-inline: auto; width: 100%; }
 .step-tabs { justify-content: safe center; }
 .pill { color: var(--juniper); }
+blockquote { font-style: italic; }
+.qlist { display: flex; flex-direction: column; gap: 32px; max-width: 62ch; width: 100%; align-self: center; }
+.step-hint { text-align: center; font-weight: 600; margin-bottom: -12px; }
+.step-tabs { counter-reset: tab; flex-wrap: wrap; overflow: visible; gap: 10px; }
+.step-tabs button { counter-increment: tab; padding: 11px 20px; font-size: 0.95rem; font-weight: 600; border: 1.5px solid var(--jacaranda); color: var(--jacaranda); }
+.step-tabs button::before { content: counter(tab) ". "; }
+.step-tabs button:hover { background: var(--jacaranda-soft); }
+.step-tabs button[aria-selected="true"]:hover { background: var(--jacaranda); }
+@media print { .step-hint { display: none; } }
 html { scroll-behavior: smooth; }
 .toc { position: -webkit-sticky; position: sticky; top: 0; z-index: 50; border-bottom: 0; box-shadow: 0 0 0 100vmax var(--paper), 0 1px 0 var(--rule); clip-path: inset(0 -100vmax -1px); }
 .toc ol { justify-content: safe center; }
@@ -225,28 +234,28 @@ html { scroll-behavior: smooth; }
 
 <header class="hero" id="numbers">
   <div class="eyebrow">AI Hackathon · King Khalid University · Women's cohort · September 2026</div>
-  <h1>AI Coding For Business Results</h1>
-  <p class="lede">Final-year students from accounting, nursing, translation and engineering learned to build with AI. In 3 days, 25 of them built and submitted a product of their own.</p>
+  <h1>AI For Business Results</h1>
+  <p class="lede">Final-year students from accounting, nursing, translation and engineering learned to build with AI. In 3 days, 25 of them built and submitted a project of their own.</p>
   <div class="cta">
     <a class="btn lg" href="#top-five">See the top five</a>
-    <a class="btn lg ghost" href="#projects">Browse all 25 products</a>
+    <a class="btn lg ghost" href="#projects">Browse all 25 projects</a>
   </div>
   <div class="facts">
     <div><b>35</b><span>registered</span></div>
     <div><b>31</b><span>completed Day 1</span></div>
-    <div><b>25</b><span>submitted a product</span></div>
+    <div><b>25</b><span>submitted a project</span></div>
     <div><b>5</b><span>showcased on Demo Day</span></div>
   </div>
   <div class="cover-figs">
     <figure><img src="img/z-shaima-1.jpg" alt="SAAY, a job application tracker by Shaima Alharmali"><figcaption>Job Application Tracker, by Shaima Alharmali</figcaption></figure>
     <figure><img src="img/z-munira-1.jpg" alt="Invoice Maker, by Munira Mansour Alqahtani"><figcaption>Invoice Maker, by Munira Mansour Alqahtani</figcaption></figure>
   </div>
-  <blockquote class="lead-quote">Three days ago, none of you knew how to code with AI and build something that was actually useful for people. And here we are today.<cite>Sai, lead instructor, to the students on Demo Day</cite></blockquote>
+  <blockquote class="lead-quote">“Three days ago, none of you knew how to code with AI and build something that was actually useful for people. And here we are today.”<cite>Sai, lead instructor, to the students on Demo Day</cite></blockquote>
 </header>
 
 <nav class="toc" aria-label="Sections"><ol>
   <li><a href="#starting-point">Highlights</a></li>
-  <li><a href="#top-five">Products Built By Students</a></li>
+  <li><a href="#top-five">Projects Built By Students</a></li>
   <li><a href="#stories">What The Students Thought</a></li>
 </ol></nav>
 
@@ -258,23 +267,11 @@ html { scroll-behavior: smooth; }
   <div class="pills">
     <span class="pill">Accounting</span><span class="pill">Translation</span><span class="pill">Nursing</span><span class="pill">Public health</span><span class="pill">Business</span><span class="pill">Media</span><span class="pill">Information systems</span><span class="pill">Engineering</span>
   </div>
-  <blockquote class="lead-quote">For someone who cannot even use a computer correctly, building this from A to Z is a huge thing for me.<cite>Jenan Abdulrahman, translation</cite></blockquote>
+  <blockquote class="lead-quote">“For someone who cannot even use a computer correctly, building this from A to Z is a huge thing for me.”<cite>Jenan Abdulrahman, translation</cite></blockquote>
   <p class="note">Counted from the 10 students who described their background on Demo Day.</p>
 </section>
 
-<section id="distinctive" class="alt">
-  <div class="stack col">
-    <div class="eyebrow">What stood out</div>
-    <h2>In the words of our lead instructor, Sai</h2>
-  </div>
-  <blockquote class="lead-quote">You have a level of commitment that I don't see in most adults, I don't see in most 40, 50-year-olds.<cite>Sai, to the students on Demo Day</cite></blockquote>
-  <div class="solo">
-    <span class="big">12 → 25</span>
-    <p class="muted">submissions predicted vs received</p>
-  </div>
-</section>
-
-<section id="top-five">
+<section id="top-five" class="alt">
   <div class="stack col">
     <div class="eyebrow">Demo Day</div>
     <h2>The top five, and how we chose them</h2>
@@ -287,6 +284,7 @@ html { scroll-behavior: smooth; }
     <div><b>20%</b><span>creative design</span></div>
   </div>
 
+  <p class="step-hint">Five projects. Click each button to see that project.</p>
   <div class="stepper" data-stepper>
   <article class="build step" data-label="Invoice Maker">
     <div class="build-head"><h3>Invoice Maker</h3><span class="pill">Invoice maker</span></div>
@@ -303,7 +301,7 @@ html { scroll-behavior: smooth; }
         <li>Saves customers and numbers each invoice</li>
         <li>Arabic and English, works on a phone</li>
       </ul>
-      <blockquote>I chose this project because I'm an accounting student.<cite>Munira</cite></blockquote>
+      <blockquote>“I chose this project because I'm an accounting student.”<cite>Munira</cite></blockquote>
     </div>
     <p class="fix"><b>To fix next</b>Some labels stay in English after switching to Arabic.</p>
   </article>
@@ -321,9 +319,9 @@ html { scroll-behavior: smooth; }
       <ul>
         <li>Matches you to Vision 2030 sectors, with a percentage for each</li>
         <li>Suggests careers and a downloadable "2030 Passport"</li>
-        <li>"You rebuilt a million-dollar company in three days" (Sai)</li>
+        <li><em>“You rebuilt a million-dollar company in three days”</em> (Sai)</li>
       </ul>
-      <blockquote>The project was generally easy and really fun.<cite>Wasan</cite></blockquote>
+      <blockquote>“The project was generally easy and really fun.”<cite>Wasan</cite></blockquote>
     </div>
     <p class="fix"><b>To fix next</b>Tidy the PDF download, and fit the smallest phones.</p>
   </article>
@@ -339,12 +337,12 @@ html { scroll-behavior: smooth; }
     </div>
     <div class="two">
       <ul>
-        <li>"One of the most beautiful things I've ever seen" (Sai)</li>
+        <li><em>“One of the most beautiful things I've ever seen”</em> (Sai)</li>
         <li>Twelve questions, six sectors, a shareable result card</li>
         <li>Natural Arabic, not word-for-word translation</li>
         <li>Tested on her sister and two friends</li>
       </ul>
-      <blockquote>AI is a tool that helps us create, not a replacement.<cite>Atheer</cite></blockquote>
+      <blockquote>“AI is a tool that helps us create, not a replacement.”<cite>Atheer</cite></blockquote>
     </div>
     <p class="fix"><b>To fix next</b>Ground the quiz in the official Vision 2030 sector guidance.</p>
   </article>
@@ -365,7 +363,7 @@ html { scroll-behavior: smooth; }
         <li>A bad-weather alternative for each plan</li>
         <li>Some photos taken by Jenan and her sisters</li>
       </ul>
-      <blockquote>When I travel, I want to live a day as a local.<cite>Jenan</cite></blockquote>
+      <blockquote>“When I travel, I want to live a day as a local.”<cite>Jenan</cite></blockquote>
     </div>
     <p class="fix"><b>To fix next</b>A couple of map links need repairing.</p>
   </article>
@@ -386,17 +384,17 @@ html { scroll-behavior: smooth; }
         <li>Built-in interview preparation</li>
         <li>The team tried to break it and could not</li>
       </ul>
-      <blockquote>Saay means striving. Behind every application is a person building a future.<cite>Shaima</cite></blockquote>
+      <blockquote>“Saay means striving. Behind every application is a person building a future.”<cite>Shaima</cite></blockquote>
     </div>
     <p class="fix"><b>Judges' note</b>No issues found.</p>
   </article>
   </div>
 </section>
 
-<section id="projects" class="alt">
+<section id="projects">
   <div class="stack col">
-    <div class="eyebrow">Every product</div>
-    <h2>Seven ideas, 25 different products</h2>
+    <div class="eyebrow">Every project</div>
+    <h2>Seven ideas, 25 different projects</h2>
     <p class="muted">Many in Arabic and English, built around Abha and Vision 2030</p>
   </div>
   <div class="tbl">
@@ -437,7 +435,7 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
 
-<section id="cause">
+<section id="cause" class="alt">
   <div class="stack col">
     <div class="eyebrow">Built for a cause</div>
     <h2>A game for children with diabetes</h2>
@@ -450,60 +448,23 @@ html { scroll-behavior: smooth; }
         <li>Built it in under 12 hours</li>
         <li>Plans to keep building it</li>
       </ul>
-      <blockquote>When I dreamed about this game two years ago, I put it aside and said, "I'll look at it after I graduate." When this hackathon showed up, I got so excited.<cite>Enas</cite></blockquote>
+      <blockquote>“When I dreamed about this game two years ago, I put it aside and said, ‘I'll look at it after I graduate.’ When this hackathon showed up, I got so excited.”<cite>Enas</cite></blockquote>
     </div>
     <figure><img src="img/l-enas.jpg" alt="Brave Gluco, a game for children with diabetes"><figcaption>Brave Gluco</figcaption></figure>
   </div>
 </section>
 
-<section id="stories" class="alt">
+<section id="stories">
   <div class="stack col">
     <div class="eyebrow">Their stories</div>
     <h2>What it was like, in their words</h2>
   </div>
-  <div class="stepper" data-stepper>
-    <article class="story step" data-label="Jenan">
-      <h3>From calling her dad to open a file</h3>
-      <p class="who">Jenan Abdulrahman · translation · Abha Guide</p>
-      <blockquote>When I started, I was calling my dad a thousand times because I couldn't open a file. When I looked at my website for the first time, it was like, oh my gosh, it's easy.</blockquote>
-    </article>
-    <article class="story step" data-label="Sama">
-      <h3>Her 13-year-old brother wants to learn next</h3>
-      <p class="who">Sama Mohammed Ahmed · translation · Abha Explorer</p>
-      <blockquote>When he saw my website he was surprised and asked me how to do coding. I told him everything, and he is so excited to try it.</blockquote>
-    </article>
-    <article class="story step" data-label="Retal">
-      <h3>She deleted her project and started again</h3>
-      <p class="who">Retal Alalmonus · business administration · Professional portfolio</p>
-      <p>A simple colour change kept failing, so she rebuilt from the start and still submitted.</p>
-      <blockquote>Give it a try, and don't be afraid of making mistakes.</blockquote>
-    </article>
-    <article class="story step" data-label="Shorouq">
-      <h3>You don't have to know everything first</h3>
-      <p class="who">Shorouq Dhafer Abdullah · industrial engineering · CareerFlow</p>
-      <blockquote>Don't underestimate what you can create just because you have not learned how to do it yet.</blockquote>
-    </article>
-    <article class="story step" data-label="Wateen">
-      <h3>Leaving with more than a project</h3>
-      <p class="who">Wateen Mohammed Bomdrah · management information systems · Discover Your Future</p>
-      <blockquote>You didn't just teach us how to build something with AI. You challenged us to believe that we could do things we had never tried before.</blockquote>
-    </article>
-  </div>
-</section>
-
-<section id="room">
-  <div class="stack col">
-    <div class="eyebrow">In the room</div>
-    <h2>The students cheered each other on</h2>
-    <p class="muted">From the live chat on Demo Day, 30 September 2026</p>
-  </div>
-  <div class="chat">
-    <div class="msg"><b>17:23 · Munira Alqahtani</b>The invoice number changes every time you print, in case you hadn't noticed.</div>
-    <div class="msg"><b>17:34 · Enas Alhazmi</b>Atheer are u IT?</div>
-    <div class="msg"><b>17:38 · Shaima Alharmali</b>It's so good that AI cannot even do it by its own! It has a human touch, ATHEER's touch!</div>
-    <div class="msg"><b>17:55 · Enas Alhazmi, on SAAY</b>I will use your project with looove next year</div>
-    <div class="msg"><b>18:02 · Shaima Alharmali</b>I feel like I can own this world 🙂</div>
-    <div class="msg"><b>18:03 · Malath Mohammed</b>An experience I never expected to have, and it was absolutely amazing!</div>
+  <div class="qlist">
+    <blockquote>“When I started, I was calling my dad a thousand times because I couldn't open a file. When I looked at my website for the first time, it was like, oh my gosh, it's easy.”<cite>Jenan Abdulrahman · translation</cite></blockquote>
+    <blockquote>“When he saw my website he was surprised and asked me how to do coding. I told him everything, and he is so excited to try it.”<cite>Sama Mohammed Ahmed · translation, on her 13-year-old brother</cite></blockquote>
+    <blockquote>“Give it a try, and don't be afraid of making mistakes.”<cite>Retal Alalmonus · business administration</cite></blockquote>
+    <blockquote>“Don't underestimate what you can create just because you have not learned how to do it yet.”<cite>Shorouq Dhafer Abdullah · industrial engineering</cite></blockquote>
+    <blockquote>“You didn't just teach us how to build something with AI. You challenged us to believe that we could do things we had never tried before.”<cite>Wateen Mohammed Bomdrah · management information systems</cite></blockquote>
   </div>
 </section>
 
@@ -514,8 +475,8 @@ html { scroll-behavior: smooth; }
   </div>
   <div class="obs">
     <div class="card"><h3>A Keep Building Pack</h3><p>Every student gets a guide to setup, habits, security and publishing.</p></div>
-    <div class="card"><h3>On every CV</h3><p>Each product is real, live work a student can show an employer.</p></div>
-    <div class="card"><h3>They asked to go further</h3><p>Real users and more complex products.</p></div>
+    <div class="card"><h3>On every CV</h3><p>Each project is real, live work a student can show an employer.</p></div>
+    <div class="card"><h3>They asked to go further</h3><p>Real users and more complex projects.</p></div>
     <div class="card"><h3>Ready to run again</h3><p>The same programme can run for other KKU colleges and partner organisations.</p></div>
   </div>
 </section>
@@ -547,7 +508,7 @@ html { scroll-behavior: smooth; }
     const n = g.children.length;
     if (n <= 8) return;
     const b = document.createElement('button');
-    b.type = 'button'; b.className = 'more'; b.textContent = `Show all ${n} products`;
+    b.type = 'button'; b.className = 'more'; b.textContent = `Show all ${n} projects`;
     b.addEventListener('click', () => { g.classList.add('open'); b.remove(); });
     g.classList.add('js'); g.after(b);
   });
