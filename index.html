@@ -226,6 +226,40 @@ html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 @media (max-width: 480px) { section { padding-block: 52px; } .hero { padding-block: 48px 40px; } }
 @media print { section.alt, .hero { box-shadow: none; clip-path: none; background: none; } .cta { display: none; } }
+
+/* Skills and employability: idea-to-app flow, capability cards, degree + AI rows, interview triad */
+.flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; counter-reset: flow; }
+.flow div { counter-increment: flow; position: relative; padding: 16px 28px 16px 0; border-top: 3px solid var(--jacaranda); display: flex; flex-direction: column; gap: 4px; }
+.flow div + div { padding-left: 28px; }
+.flow div::before { content: "0" counter(flow); font-family: var(--f-data); font-size: 0.8rem; color: var(--jacaranda); }
+.flow div:not(:last-child)::after { content: "→"; position: absolute; right: -0.5em; top: -0.82em; background: var(--sheet); color: var(--jacaranda); font-size: 1.2rem; line-height: 1; padding-inline: 4px; }
+.flow b { font-family: var(--f-display); font-weight: 400; font-size: 1.3rem; }
+.flow p { font-size: 0.92rem; color: var(--ink-2); }
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.skills .card { gap: 6px; border-top: 3px solid var(--jacaranda); }
+.skills h3 { font-size: 1.15rem; }
+.skills p { color: var(--ink-2); font-size: 0.9rem; }
+.eq { display: flex; flex-direction: column; gap: 10px; }
+.eq-row { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 0.8fr) auto minmax(0, 1.6fr); align-items: center; gap: 14px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; padding: 14px 18px; break-inside: avoid; }
+.eq-row.head { background: none; border: 0; padding-block: 0; }
+.eq-row.head span { font-family: var(--f-data); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+.eq-row .deg { font-family: var(--f-display); font-size: 1.15rem; }
+.eq-row .ai { color: var(--jacaranda); font-weight: 600; }
+.eq-row .op { font-family: var(--f-data); font-size: 1.2rem; color: var(--jacaranda); text-align: center; }
+.eq-row .out small { display: block; color: var(--ink-2); font-size: 0.8rem; }
+@media (max-width: 820px) {
+  .flow { grid-template-columns: 1fr; gap: 14px; }
+  .flow div, .flow div + div { padding: 12px 0 0; }
+  .flow div::after { display: none; }
+  .eq-row { grid-template-columns: auto auto 1fr; row-gap: 8px; }
+  .eq-row.head { display: none; }
+  .eq-row .op.is { display: none; }
+  .eq-row .out { grid-column: 1 / -1; border-top: 1px solid var(--rule); padding-top: 8px; }
+}
+h3.sub { text-align: center; margin-bottom: -8px; }
+section:not(.alt) .flow div::after { background: var(--paper); }
+@media (min-width: 821px) { .obs.three { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media print { .flow, .skills .card { break-inside: avoid; } }
 </style>
 
 </head>
@@ -257,6 +291,7 @@ html { scroll-behavior: smooth; }
   <li><a href="#starting-point">Highlights</a></li>
   <li><a href="#top-five">Projects Built By Students</a></li>
   <li><a href="#stories">What The Students Thought</a></li>
+  <li><a href="#employers">Value For Employers</a></li>
 </ol></nav>
 
 <section id="starting-point">
@@ -271,7 +306,27 @@ html { scroll-behavior: smooth; }
   <p class="note">Counted from the 10 students who described their background on Demo Day.</p>
 </section>
 
-<section id="top-five" class="alt">
+<section id="skills" class="alt">
+  <div class="stack col">
+    <div class="eyebrow">What they learned</div>
+    <h2>Vibe coding: building real apps by telling AI what to make</h2>
+    <p class="muted">Students gave instructions in plain language and directed AI to build complete projects.</p>
+  </div>
+  <div class="flow">
+    <div><b>An idea</b><p>A real need, often from their own field of study</p></div>
+    <div><b>A working app</b><p>Built by directing AI in plain language</p></div>
+    <div><b>Published live</b><p>A link anyone can open, relevant to business needs</p></div>
+  </div>
+  <div class="skills">
+    <div class="card"><h3>AI-enabled creation</h3><p>Used AI to build practical digital solutions: 25 projects</p></div>
+    <div class="card"><h3>Business problem-solving</h3><p>Turned needs into useful apps: invoices, job trackers, salary planners</p></div>
+    <div class="card"><h3>End-to-end delivery</h3><p>Owned every step, from concept to a published app</p></div>
+    <div class="card"><h3>Learning agility and resilience</h3><p>Mastered tools that were new to them and got past obstacles</p></div>
+    <div class="card"><h3>Innovation and initiative</h3><p>Turned ideas into results they can demonstrate</p></div>
+  </div>
+</section>
+
+<section id="top-five">
   <div class="stack col">
     <div class="eyebrow">Demo Day</div>
     <h2>The top five, and how we chose them</h2>
@@ -391,7 +446,7 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
 
-<section id="projects">
+<section id="projects" class="alt">
   <div class="stack col">
     <div class="eyebrow">Every project</div>
     <h2>Seven ideas, 25 different projects</h2>
@@ -435,7 +490,7 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
 
-<section id="cause" class="alt">
+<section id="cause">
   <div class="stack col">
     <div class="eyebrow">Built for a cause</div>
     <h2>A game for children with diabetes</h2>
@@ -454,7 +509,7 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
 
-<section id="stories">
+<section id="stories" class="alt">
   <div class="stack col">
     <div class="eyebrow">Their stories</div>
     <h2>What it was like, in their words</h2>
@@ -468,14 +523,35 @@ html { scroll-behavior: smooth; }
   </div>
 </section>
 
+<section id="employers">
+  <div class="stack col">
+    <div class="eyebrow">Value for employers</div>
+    <h2>A clear edge in interviews</h2>
+    <p class="muted">Graduates who combine their academic knowledge with the ability to build, prototype and deliver using AI.</p>
+  </div>
+  <div class="eq">
+    <div class="eq-row head" aria-hidden="true"><span>Their degree</span><span></span><span>Their new skill</span><span></span><span>What they built</span></div>
+    <div class="eq-row"><span class="deg">Accounting</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out">An invoice maker that adds Saudi VAT<small>Munira Mansour Alqahtani</small></span></div>
+    <div class="eq-row"><span class="deg">Industrial engineering</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out">A job application tracker with interview preparation<small>Shaima Alharmali</small></span></div>
+    <div class="eq-row"><span class="deg">Public health</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out">A game that teaches children about diabetes<small>Enas Alhassan Alhazmi</small></span></div>
+    <div class="eq-row"><span class="deg">Translation</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out">A Vision 2030 career quiz in natural Arabic<small>Atheer Ahmed Ali Alqahtani</small></span></div>
+  </div>
+  <h3 class="sub">On their CV and in an interview, each student can show</h3>
+  <div class="flow">
+    <div><b>What they built</b><p>A live, published app they can open and demonstrate</p></div>
+    <div><b>Why it matters</b><p>The real need it solves for a business or for people</p></div>
+    <div><b>How they delivered it</b><p>From idea to published app, using AI</p></div>
+  </div>
+  <blockquote class="lead-quote">Practical evidence of their ability to turn ideas into results using AI.</blockquote>
+</section>
+
 <section id="next" class="alt">
   <div class="stack col">
     <div class="eyebrow">What comes next</div>
     <h2>They keep building</h2>
   </div>
-  <div class="obs">
+  <div class="obs three">
     <div class="card"><h3>A Keep Building Pack</h3><p>Every student gets a guide to setup, habits, security and publishing.</p></div>
-    <div class="card"><h3>On every CV</h3><p>Each project is real, live work a student can show an employer.</p></div>
     <div class="card"><h3>They asked to go further</h3><p>Real users and more complex projects.</p></div>
     <div class="card"><h3>Ready to run again</h3><p>The same programme can run for other KKU colleges and partner organisations.</p></div>
   </div>
