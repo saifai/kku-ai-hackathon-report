@@ -258,6 +258,10 @@ html { scroll-behavior: smooth; }
   .eq-row .out { grid-column: 1 / -1; border-top: 1px solid var(--rule); padding-top: 8px; }
 }
 h3.sub { text-align: center; margin-bottom: -8px; }
+.proof .card b { font-family: var(--f-display); font-weight: 400; font-size: 2.8rem; line-height: 1; color: var(--jacaranda); font-variant-numeric: tabular-nums; }
+.proof h3 { font-size: 1.3rem; }
+.proof p { color: var(--ink-2); }
+.proof .src { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--rule); font-family: var(--f-data); font-size: 0.74rem; letter-spacing: 0.04em; color: var(--ink-2); }
 @media (min-width: 821px) { .obs.three { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media print { .flow, .skills .card { break-inside: avoid; } }
 </style>
@@ -288,13 +292,42 @@ h3.sub { text-align: center; margin-bottom: -8px; }
 </header>
 
 <nav class="toc" aria-label="Sections"><ol>
+  <li><a href="#employers">Value For Employers</a></li>
   <li><a href="#starting-point">Highlights</a></li>
   <li><a href="#top-five">Projects Built By Students</a></li>
   <li><a href="#stories">What The Students Thought</a></li>
-  <li><a href="#employers">Value For Employers</a></li>
 </ol></nav>
 
-<section id="starting-point">
+<section id="employers">
+  <div class="stack col">
+    <div class="eyebrow">Value for employers</div>
+    <h2>A clear edge in interviews</h2>
+    <p class="muted">Graduates who combine their academic knowledge with the ability to build, prototype and deliver using AI.</p>
+  </div>
+  <h3 class="sub">What independent research says about AI skills</h3>
+  <div class="obs three proof">
+    <div class="card"><b>69%</b><h3>AI jobs are growing seven times faster than the market</h3><p>Jobs requiring specific AI skills grew 69%, versus 9% for the overall job market, and carried an average 62% wage premium.</p><span class="src">PwC · 2026 Global AI Jobs Barometer · June 2026</span><a class="btn" href="https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-jobs-barometer.html" target="_blank" rel="noopener">Read the source ↗</a></div>
+    <div class="card"><b>23%</b><h3>AI skills out-earn a master's degree</h3><p>AI skills carried a 23% wage premium in UK job vacancies, against 13% for a master's degree.</p><span class="src">Oxford Internet Institute, University of Oxford · March 2025</span><a class="btn" href="https://www.ox.ac.uk/news/2025-03-04-skills-based-hiring-driving-salary-premiums-ai-sector-employers-face-talent-shortage" target="_blank" rel="noopener">Read the source ↗</a></div>
+    <div class="card"><b>66%</b><h3>Most leaders won't hire without AI skills</h3><p>66% of surveyed leaders say they would not hire someone without AI skills. 71% would choose AI skills over more experience.</p><span class="src">Microsoft and LinkedIn · 2024 Work Trend Index · May 2024</span><a class="btn" href="https://www.microsoft.com/en-us/worklab/work-trend-index/ai-at-work-is-here-now-comes-the-hard-part" target="_blank" rel="noopener">Read the source ↗</a></div>
+  </div>
+  <h3 class="sub">Tangible evidence for every CV and interview</h3>
+  <div class="flow">
+    <div><b>What they built</b><p>A live, published app they can open and demonstrate</p></div>
+    <div><b>Why it matters</b><p>The real need it solves for a business or for people</p></div>
+    <div><b>How they delivered it</b><p>From idea to published app, using AI</p></div>
+  </div>
+  <p class="note">Practical evidence of their ability to turn ideas into results using AI.</p>
+  <blockquote class="lead-quote">Their skills become visible, and their candidacy more compelling.</blockquote>
+  <div class="eq">
+    <div class="eq-row head" aria-hidden="true"><span>Their degree</span><span></span><span>Their new skill</span><span></span><span>What they built</span></div>
+    <div class="eq-row"><span class="deg">Accounting</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out"><span>An invoice maker that adds Saudi VAT<small>Munira Mansour Alqahtani</small></span><a class="btn" href="https://aishifttraining.github.io/munira-invoice-maker/" target="_blank" rel="noopener">View project ↗</a></span></div>
+    <div class="eq-row"><span class="deg">Industrial engineering</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out"><span>A job application tracker with interview preparation<small>Shaima Alharmali</small></span><a class="btn" href="https://shaimaalharmali.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View project ↗</a></span></div>
+    <div class="eq-row"><span class="deg">Public health</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out"><span>A game that teaches children about diabetes<small>Enas Alhassan Alhazmi</small></span><a class="btn" href="https://enasalhazmi.github.io/kku-site/" target="_blank" rel="noopener">View project ↗</a></span></div>
+    <div class="eq-row"><span class="deg">Translation</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out"><span>A Vision 2030 career quiz in natural Arabic<small>Atheer Ahmed Ali Alqahtani</small></span><a class="btn" href="https://atheer-here.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View project ↗</a></span></div>
+  </div>
+</section>
+
+<section id="starting-point" class="alt">
   <div class="stack col">
     <div class="eyebrow">Starting point</div>
     <h2><span class="big">100%</span>had never coded anything with AI</h2>
@@ -306,7 +339,7 @@ h3.sub { text-align: center; margin-bottom: -8px; }
   <p class="note">Counted from the 10 students who described their background on Demo Day.</p>
 </section>
 
-<section id="skills" class="alt">
+<section id="skills">
   <div class="stack col">
     <div class="eyebrow">What they learned</div>
     <h2>Vibe coding: building real apps by telling AI what to make</h2>
@@ -326,7 +359,7 @@ h3.sub { text-align: center; margin-bottom: -8px; }
   </div>
 </section>
 
-<section id="top-five">
+<section id="top-five" class="alt">
   <div class="stack col">
     <div class="eyebrow">Demo Day</div>
     <h2>The top five, and how we chose them</h2>
@@ -446,7 +479,7 @@ h3.sub { text-align: center; margin-bottom: -8px; }
   </div>
 </section>
 
-<section id="projects" class="alt">
+<section id="projects">
   <div class="stack col">
     <div class="eyebrow">Every project</div>
     <h2>Seven ideas, 25 different projects</h2>
@@ -490,7 +523,7 @@ h3.sub { text-align: center; margin-bottom: -8px; }
   </div>
 </section>
 
-<section id="cause">
+<section id="cause" class="alt">
   <div class="stack col">
     <div class="eyebrow">Built for a cause</div>
     <h2>A game for children with diabetes</h2>
@@ -509,7 +542,7 @@ h3.sub { text-align: center; margin-bottom: -8px; }
   </div>
 </section>
 
-<section id="stories" class="alt">
+<section id="stories">
   <div class="stack col">
     <div class="eyebrow">Their stories</div>
     <h2>What it was like, in their words</h2>
@@ -521,29 +554,6 @@ h3.sub { text-align: center; margin-bottom: -8px; }
     <blockquote>“Don't underestimate what you can create just because you have not learned how to do it yet.”<cite>Shorouq Dhafer Abdullah · industrial engineering</cite></blockquote>
     <blockquote>“You didn't just teach us how to build something with AI. You challenged us to believe that we could do things we had never tried before.”<cite>Wateen Mohammed Bomdrah · management information systems</cite></blockquote>
   </div>
-</section>
-
-<section id="employers">
-  <div class="stack col">
-    <div class="eyebrow">Value for employers</div>
-    <h2>A clear edge in interviews</h2>
-    <p class="muted">Graduates who combine their academic knowledge with the ability to build, prototype and deliver using AI.</p>
-  </div>
-  <div class="eq">
-    <div class="eq-row head" aria-hidden="true"><span>Their degree</span><span></span><span>Their new skill</span><span></span><span>What they built</span></div>
-    <div class="eq-row"><span class="deg">Accounting</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out"><span>An invoice maker that adds Saudi VAT<small>Munira Mansour Alqahtani</small></span><a class="btn" href="https://aishifttraining.github.io/munira-invoice-maker/" target="_blank" rel="noopener">View project ↗</a></span></div>
-    <div class="eq-row"><span class="deg">Industrial engineering</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out"><span>A job application tracker with interview preparation<small>Shaima Alharmali</small></span><a class="btn" href="https://shaimaalharmali.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View project ↗</a></span></div>
-    <div class="eq-row"><span class="deg">Public health</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out"><span>A game that teaches children about diabetes<small>Enas Alhassan Alhazmi</small></span><a class="btn" href="https://enasalhazmi.github.io/kku-site/" target="_blank" rel="noopener">View project ↗</a></span></div>
-    <div class="eq-row"><span class="deg">Translation</span><span class="op">+</span><span class="ai">Building with AI</span><span class="op is">=</span><span class="out"><span>A Vision 2030 career quiz in natural Arabic<small>Atheer Ahmed Ali Alqahtani</small></span><a class="btn" href="https://atheer-here.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View project ↗</a></span></div>
-  </div>
-  <h3 class="sub">Tangible evidence for every CV and interview</h3>
-  <div class="flow">
-    <div><b>What they built</b><p>A live, published app they can open and demonstrate</p></div>
-    <div><b>Why it matters</b><p>The real need it solves for a business or for people</p></div>
-    <div><b>How they delivered it</b><p>From idea to published app, using AI</p></div>
-  </div>
-  <p class="note">Practical evidence of their ability to turn ideas into results using AI.</p>
-  <blockquote class="lead-quote">Their skills become visible, and their candidacy more compelling.</blockquote>
 </section>
 
 <section id="next" class="alt">
