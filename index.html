@@ -85,6 +85,8 @@ figcaption .src { font-family: var(--f-data); font-size: 0.74rem; letter-spacing
 .facts div:last-child { border-right: 0; }
 .facts b { font-family: var(--f-display); font-weight: 400; font-size: 2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .facts span { font-size: 0.85rem; color: var(--ink-2); }
+@media (max-width: 560px) { .tbl .split { display: none; } }
+.facts small { display: block; font-size: 0.78rem; font-family: var(--f-data); letter-spacing: 0.02em; margin-top: 2px; }
 
 table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
 th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
@@ -271,24 +273,24 @@ h3.sub { text-align: center; margin-bottom: -8px; }
 <div class="wrap">
 
 <header class="hero" id="numbers">
-  <div class="eyebrow">AI Hackathon · King Khalid University · Women's cohort · September 2026</div>
+  <div class="eyebrow">AI Hackathon · King Khalid University · Women's and men's cohorts · September and October 2026</div>
   <h1>AI For Business Results</h1>
-  <p class="lede">Final-year students from accounting, nursing, translation and engineering learned to build with AI. In 3 days, 25 of them built and submitted a project of their own.</p>
+  <p class="lede">Final-year students from accounting, nursing, translation and engineering learned to build with AI. In 3 days, 39 of them built and submitted a project of their own.</p>
   <div class="cta">
-    <a class="btn lg" href="#top-five">See the top five</a>
-    <a class="btn lg ghost" href="#projects">Browse all 25 projects</a>
+    <a class="btn lg" href="#top-five">See the top projects</a>
+    <a class="btn lg ghost" href="#projects">Browse all 39 projects</a>
   </div>
   <div class="facts">
-    <div><b>35</b><span>registered</span></div>
-    <div><b>31</b><span>completed Day 1</span></div>
-    <div><b>25</b><span>submitted a project</span></div>
-    <div><b>5</b><span>showcased on Demo Day</span></div>
+    <div><b>56</b><span>registered<small>35 women · 21 men</small></span></div>
+    <div><b>46</b><span>completed Day 1<small>31 women · 15 men</small></span></div>
+    <div><b>39</b><span>submitted a project<small>25 women · 14 men</small></span></div>
+    <div><b>10</b><span>showcased on Demo Day<small>5 women · 5 men</small></span></div>
   </div>
   <div class="cover-figs">
     <figure><img src="img/z-shaima-1.jpg" alt="SAAY, a job application tracker by Shaima Alharmali"><figcaption>Job Application Tracker, by Shaima Alharmali</figcaption></figure>
-    <figure><img src="img/z-munira-1.jpg" alt="Invoice Maker, by Munira Mansour Alqahtani"><figcaption>Invoice Maker, by Munira Mansour Alqahtani</figcaption></figure>
+    <figure><img src="img/b-ali-2.jpg" alt="Village Guardians, a game by Ali Hassan Al-Shehri"><figcaption>Village Guardians, a game by Ali Hassan Al-Shehri</figcaption></figure>
   </div>
-  <blockquote class="lead-quote">“Three days ago, none of you knew how to code with AI and build something that was actually useful for people. And here we are today.”<cite>Sai, lead instructor, to the students on Demo Day</cite></blockquote>
+  <blockquote class="lead-quote">“Three days ago, none of you knew how to code with AI and build something that was actually useful for people. And here we are today.”<cite>Sai, lead instructor, to the women's cohort on Demo Day</cite></blockquote>
 </header>
 
 <nav class="toc" aria-label="Sections"><ol>
@@ -336,7 +338,7 @@ h3.sub { text-align: center; margin-bottom: -8px; }
     <span class="pill">Accounting</span><span class="pill">Translation</span><span class="pill">Nursing</span><span class="pill">Public health</span><span class="pill">Business</span><span class="pill">Media</span><span class="pill">Information systems</span><span class="pill">Engineering</span>
   </div>
   <blockquote class="lead-quote">“For someone who cannot even use a computer correctly, building this from A to Z is a huge thing for me.”<cite>Jenan Abdulrahman, translation</cite></blockquote>
-  <p class="note">Counted from the 10 students who described their background on Demo Day.</p>
+  <p class="note">Counted from the 10 women who described their background on Demo Day.</p>
 </section>
 
 <section id="skills">
@@ -351,7 +353,7 @@ h3.sub { text-align: center; margin-bottom: -8px; }
     <div><b>Published live</b><p>A link anyone can open, relevant to business needs</p></div>
   </div>
   <div class="skills">
-    <div class="card"><h3>AI-enabled creation</h3><p>Used AI to build practical digital solutions: 25 projects</p></div>
+    <div class="card"><h3>AI-enabled creation</h3><p>Used AI to build practical digital solutions: 39 projects</p></div>
     <div class="card"><h3>Business problem-solving</h3><p>Turned needs into useful apps: invoices, job trackers, salary planners</p></div>
     <div class="card"><h3>End-to-end delivery</h3><p>Owned every step, from concept to a published app</p></div>
     <div class="card"><h3>Learning agility and resilience</h3><p>Mastered tools that were new to them and got past obstacles</p></div>
@@ -362,8 +364,8 @@ h3.sub { text-align: center; margin-bottom: -8px; }
 <section id="top-five" class="alt">
   <div class="stack col">
     <div class="eyebrow">Demo Day</div>
-    <h2>The top five, and how we chose them</h2>
-    <p class="muted">On-time submission came first. The team then reviewed, scored and ranked every project on four weighted criteria. Five were demonstrated live, in no particular order.</p>
+    <h2>The top five from each cohort, and how we chose them</h2>
+    <p class="muted">On-time submission came first. The team then reviewed, scored and ranked every project on four weighted criteria. Five from each cohort were demonstrated live, in no particular order.</p>
   </div>
   <div class="facts">
     <div><b>35%</b><span>it works</span></div>
@@ -372,6 +374,7 @@ h3.sub { text-align: center; margin-bottom: -8px; }
     <div><b>20%</b><span>creative design</span></div>
   </div>
 
+  <h3 class="sub">Women's cohort · Demo Day 30 September</h3>
   <p class="step-hint">Five projects. Click each button to see that project.</p>
   <div class="stepper" data-stepper>
   <article class="build step" data-label="Invoice Maker">
@@ -477,28 +480,98 @@ h3.sub { text-align: center; margin-bottom: -8px; }
     <p class="fix"><b>Judges' note</b>No issues found.</p>
   </article>
   </div>
+
+  <h3 class="sub">Men's cohort · Demo Day 3 October</h3>
+  <p class="step-hint">Five projects. Click each button to see that project.</p>
+  <div class="stepper" data-stepper>
+  <article class="build step" data-label="Job Application Tracker">
+    <div class="build-head"><h3>Career Desk</h3><span class="pill">Job application tracker</span></div>
+    <p class="who">Abdulaziz Abdullah Alshehri</p>
+    <a class="btn" href="https://aishifttraining.github.io/abdulaziz-job-tracker/" target="_blank" rel="noopener">View live project ↗</a>
+    <div class="grid-2">
+      <figure><img src="img/b-abdulaziz-1.jpg" alt="Career Desk job application tracker"><figcaption>Every application, follow-up and salary in one place</figcaption></figure>
+      <figure><img src="img/b-abdulaziz-2.jpg" alt="Career Desk CV keyword checker"><figcaption>A CV keyword checker for each job ad</figcaption></figure>
+    </div>
+    <ul>
+      <li>Tracks each application's stage, date and salary</li>
+      <li>Shows which follow-ups are due and drafts the message</li>
+      <li>Compares each salary with the average of your list</li>
+      <li>Checks a CV against a job ad for missing keywords</li>
+    </ul>
+  </article>
+
+  <article class="build step" data-label="Village Guardians">
+    <div class="build-head"><h3>Village Guardians · حماة الديرة</h3><span class="pill">Classic game</span></div>
+    <p class="who">Ali Hassan Al-Shehri</p>
+    <a class="btn" href="https://aishifttraining.github.io/ali-asir-game/" target="_blank" rel="noopener">View live project ↗</a>
+    <div class="grid-3">
+      <figure><img src="img/b-ali-1.jpg" alt="Village Guardians start screen"><figcaption>A 60-second village challenge</figcaption></figure>
+      <figure><img src="img/b-ali-2.jpg" alt="Village Guardians story scene"><figcaption>A short story opens each round</figcaption></figure>
+      <figure><img src="img/b-ali-3.jpg" alt="Village Guardians monsters arrive"><figcaption>Defend the village, race for the treasure</figcaption></figure>
+    </div>
+    <ul>
+      <li>Defend the village from monsters and race rivals for the treasure</li>
+      <li>Difficulty levels and computer rivals</li>
+      <li>Story scenes, music and sound effects</li>
+      <li>Arabic and English</li>
+    </ul>
+  </article>
+
+  <article class="build step" data-label="Pathly">
+    <div class="build-head"><h3>Pathly</h3><span class="pill">CV or portfolio page</span></div>
+    <p class="who">Ahmed Naif Alahmary</p>
+    <a class="btn" href="https://ahmed-naif.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View live project ↗</a>
+    <ul>
+      <li>Build your profile, then create your CV</li>
+      <li>Helps you discover a career path</li>
+    </ul>
+  </article>
+
+  <article class="build step" data-label="Breathe Abha">
+    <div class="build-head"><h3>Breathe Abha</h3><span class="pill">Abha visitor guide</span></div>
+    <p class="who">Mohammed Ali Alhassan Sarhan</p>
+    <a class="btn" href="https://w3fv.github.io/breathe-abha-site/" target="_blank" rel="noopener">View live project ↗</a>
+    <ul>
+      <li>Places in Aseer for every mood: cafes, events, nature and heritage</li>
+      <li>Builds your own Aseer itinerary</li>
+      <li>Arabic and English</li>
+    </ul>
+  </article>
+
+  <article class="build step" data-label="Sirius">
+    <div class="build-head"><h3>Sirius</h3><span class="pill">Abha visitor guide</span></div>
+    <p class="who">Saleh Nasser Asiri</p>
+    <a class="btn" href="https://aishifttraining.github.io/saleh-abha-guide/" target="_blank" rel="noopener">View live project ↗</a>
+    <ul>
+      <li>Abha's highlands, mountain trails and stone heritage</li>
+      <li>Trip planning and a list of attractions</li>
+      <li>Arabic and English, light and dark mode</li>
+    </ul>
+  </article>
+  </div>
 </section>
 
 <section id="projects">
   <div class="stack col">
     <div class="eyebrow">Every project</div>
-    <h2>Seven ideas, 25 different projects</h2>
+    <h2>Seven ideas, 39 different projects</h2>
     <p class="muted">Many in Arabic and English, built around Abha and Vision 2030</p>
   </div>
   <div class="tbl">
     <table>
-      <thead><tr><th>Project</th><th style="text-align:right">Built</th></tr></thead>
+      <thead><tr><th>Project</th><th class="split" style="text-align:right">Women</th><th class="split" style="text-align:right">Men</th><th style="text-align:right">Built</th></tr></thead>
       <tbody>
-        <tr><td><span class="typebar" style="width:90px"></span>Abha visitor guide</td><td class="num">9</td></tr>
-        <tr><td><span class="typebar" style="width:50px"></span>Which Vision 2030 sector suits you?</td><td class="num">5</td></tr>
-        <tr><td><span class="typebar" style="width:30px"></span>Classic game</td><td class="num">3</td></tr>
-        <tr><td><span class="typebar" style="width:20px"></span>Invoice maker for a small business</td><td class="num">2</td></tr>
-        <tr><td><span class="typebar" style="width:20px"></span>Job application tracker</td><td class="num">2</td></tr>
-        <tr><td><span class="typebar" style="width:20px"></span>Salary and job offer planner</td><td class="num">2</td></tr>
-        <tr><td><span class="typebar" style="width:20px"></span>CV or portfolio page</td><td class="num">2</td></tr>
+        <tr><td><span class="typebar" style="width:160px"></span>Abha visitor guide</td><td class="num split">9</td><td class="num split">7</td><td class="num">16</td></tr>
+        <tr><td><span class="typebar" style="width:60px"></span>Which Vision 2030 sector suits you?</td><td class="num split">5</td><td class="num split">1</td><td class="num">6</td></tr>
+        <tr><td><span class="typebar" style="width:50px"></span>Classic game</td><td class="num split">3</td><td class="num split">2</td><td class="num">5</td></tr>
+        <tr><td><span class="typebar" style="width:40px"></span>Job application tracker</td><td class="num split">2</td><td class="num split">2</td><td class="num">4</td></tr>
+        <tr><td><span class="typebar" style="width:30px"></span>Salary and job offer planner</td><td class="num split">2</td><td class="num split">1</td><td class="num">3</td></tr>
+        <tr><td><span class="typebar" style="width:30px"></span>CV or portfolio page</td><td class="num split">2</td><td class="num split">1</td><td class="num">3</td></tr>
+        <tr><td><span class="typebar" style="width:20px"></span>Invoice maker for a small business</td><td class="num split">2</td><td class="num split">0</td><td class="num">2</td></tr>
       </tbody>
     </table>
   </div>
+  <h3 class="sub">More from the women's cohort</h3>
   <div class="gallery" data-more>
     <figure><img src="img/l-raghad.jpg" alt="Vision 2030 Sector Explorer" loading="lazy"><figcaption><b>Raghad Hassan Alsuqor</b>Vision 2030 Sector Explorer</figcaption><a class="btn" href="https://raghadalyami2004-lgtm.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View live project ↗</a></figure>
     <figure><img src="img/l-wateen.jpg" alt="Discover Your Future" loading="lazy"><figcaption><b>Wateen Mohammed Bomdrah</b>Discover Your Future</figcaption><a class="btn" href="https://aishifttraining.github.io/wateen-discover-your-future/" target="_blank" rel="noopener">View live project ↗</a></figure>
@@ -520,6 +593,18 @@ h3.sub { text-align: center; margin-bottom: -8px; }
     <figure><img src="img/l-shorouq.jpg" alt="CareerFlow" loading="lazy"><figcaption><b>Shorouq Dhafer Abdullah</b>CareerFlow</figcaption><a class="btn" href="https://aishifttraining.github.io/shorouq-careerflow/" target="_blank" rel="noopener">View live project ↗</a></figure>
     <figure><img src="img/l-retal.jpg" alt="Professional portfolio" loading="lazy"><figcaption><b>Retal Alalmonus</b>Professional portfolio</figcaption><a class="btn" href="https://reralalalmunis.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View live project ↗</a></figure>
     <figure><img src="img/l-alanoud.jpg" alt="Dental clinic page" loading="lazy"><figcaption><b>Alanoud Arim</b>Professional page, dental clinic</figcaption><a class="btn" href="https://aishifttraining.github.io/alanoud-dental-clinic/" target="_blank" rel="noopener">View live project ↗</a></figure>
+  </div>
+  <h3 class="sub">More from the men's cohort</h3>
+  <div class="obs three">
+    <div class="card"><p><b>Mahdi Alathawr</b><br>Discover your path: a Vision 2030 quiz</p><a class="btn" href="https://aishifttraining.github.io/mahdi-vision2030-quiz/" target="_blank" rel="noopener">View live project ↗</a></div>
+    <div class="card"><p><b>Rayan Al-Shehri</b><br>Saudi Vision 2030, Shaping Tomorrow</p><a class="btn" href="https://rayanalshehrii.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View live project ↗</a></div>
+    <div class="card"><p><b>Hilal Asiri</b><br>Abha Visitor Guide</p><a class="btn" href="https://hilalasiri.github.io/abha-visitor-guide/" target="_blank" rel="noopener">View live project ↗</a></div>
+    <div class="card"><p><b>Mutasim Al-Shehri</b><br>Asir Guide</p><a class="btn" href="https://aishifttraining.github.io/mutasim-abha-guide/" target="_blank" rel="noopener">View live project ↗</a></div>
+    <div class="card"><p><b>Abdualrahman Mohammed</b><br>Abha, Above the Clouds</p><a class="btn" href="https://445802878-ctrl.github.io/Abdualrahman-abha/" target="_blank" rel="noopener">View live project ↗</a></div>
+    <div class="card"><p><b>Saud Al-Qahtani</b><br>Abha Visitor Guide</p><a class="btn" href="https://saud5533.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View live project ↗</a></div>
+    <div class="card"><p><b>Mshaal Al-Tufi</b><br>Ready2Interview, a voice interview trainer</p><a class="btn" href="https://mshaalkku.github.io/kku-hackathon-project/" target="_blank" rel="noopener">View live project ↗</a></div>
+    <div class="card"><p><b>Fahad Alqahtani</b><br>Breakthrough Author Live</p><a class="btn" href="https://fahadas706.github.io/breakthrough-author-live/" target="_blank" rel="noopener">View live project ↗</a></div>
+    <div class="card"><p><b>Bader Al-Qarni</b><br>TalentFlow, a recruitment dashboard</p></div>
   </div>
 </section>
 
@@ -546,6 +631,7 @@ h3.sub { text-align: center; margin-bottom: -8px; }
   <div class="stack col">
     <div class="eyebrow">Their stories</div>
     <h2>What it was like, in their words</h2>
+    <p class="muted">From the women's cohort Demo Day</p>
   </div>
   <div class="qlist">
     <blockquote>“When I started, I was calling my dad a thousand times because I couldn't open a file. When I looked at my website for the first time, it was like, oh my gosh, it's easy.”<cite>Jenan Abdulrahman · translation</cite></blockquote>
